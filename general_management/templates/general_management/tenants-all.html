@@ -1,0 +1,88 @@
+{% extends "general_management/base.html" %}
+
+{% block title%}Avalanche | Tenants {% endblock %}
+
+{% block main-content %}
+<section class="content">
+<section class="content-header">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>
+            Tenants
+          </h1>
+      </div>
+
+      <div class="col-xs-6">
+        <a class="btn btn-success pull-right" href="{% url 'create-tenants' %}"><i class="ion-plus-circled"></i> <span>Add Tenant</span></a>
+      </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">All Tenants</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Domain</th>
+                  <th>Paid Until</th>
+                  <th>On Trial</th>
+                  <th><center>Operations</center></th>
+                </tr>
+                </thead>
+                <tbody>
+              {% for tenant in tenants %}
+                <tr>
+                  <td>{{tenant.name}}</td>
+                  <td>{{tenant.domain_url}}</td>
+                  <td>{{tenant.paid_until}}</td>
+                  <td>{{tenant.on_trial}}</td>
+                  <td class="actions no-wrap text-right"><a href="#" class="btn btn-sm btn-info"><i class="ion-edit"></i></a> 
+                  <a href="{% url 'delete-tenants' tenant.id %}" class="btn btn-sm btn-danger"><i class="ion-trash-a"></i></a></td>
+                  
+                </tr>
+               {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Domain</th>
+                  <th>Paid Until</th>
+                  <th>On Trial</th>
+                  <th><center>Operations</center></th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+      </div>
+    </div>
+
+    </section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+{% endblock %}

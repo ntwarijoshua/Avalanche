@@ -1,0 +1,65 @@
+{% extends "general_management/base.html" %}
+
+{% block title%}Avalanche | Tenants {% endblock %}
+
+{% block main-content %}
+	
+	<section class="content">
+	<section class="content-header">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>
+            Tenants
+          </h1>
+      </div>
+      </div>
+    </section>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Create Tenant</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form method="post" action="">
+              {% csrf_token %}
+              {{form.non_field_errors}}
+               <div class="row">
+               <small>{{form.domain.errors}}</small>
+                 <div class="col-xs-2">
+                 <div class="form-group">
+                   <label for="{{form.domain.id_for_label}}">Sub-domain:</label>
+                   {{form.domain}}
+                 </div>
+                 </div>
+                 <div class="col-xs-2">
+                    <h4 style="padding-top: 20px;"><i>.avalanche.dev</i></h4>
+                 </div>
+                 <small>{{form.name.errors}}</small>
+                 <div class="col-xs-8">
+                   <label for="{{form.name.id_for_label}}">Company Name:</label>
+                   {{form.name}}
+                 </div>
+                 </div>
+                 <div class="row">
+                 <small>{{form.owner_email.errors}}</small>
+                   <div class="col-xs-12">
+                     <label for="{{form.owner_email.id_for_label}}">Owner's Email:</label>
+                     {{form.owner_email}}
+                   </div>
+                 </div>
+               </div>
+                <div class="box-footer">
+                  <a href="{% url 'list-tenants' %}" class="btn btn-danger btn-flat pull-right">Cancel</a>
+                  <button type="submit" class="btn btn-success btn-flat pull-right">Save</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+{% endblock %}
