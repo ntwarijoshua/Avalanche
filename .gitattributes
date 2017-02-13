@@ -1,4 +1,6 @@
 $ cat .gitattributes
 *.py linguist-language=Python
 general_management/static/* linguist-vendored
+general_management/templates/* linguist-vendored
 public_site/static/* linguist-vendored
+public_site/templates/* linguist-vendored
