@@ -56,6 +56,7 @@ TENANT_APPS = (
 #tenant model
 
 TENANT_MODEL = 'tenants.Tenant'
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
 # Application definition

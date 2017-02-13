@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from tenant_site.views import index,setup,tenantDashboard,tenantAuth,logout_tenant
 
 urlpatterns = [
-	url(r'^$',index),
+	url(r'^$',index,name='tenant-home'),
 	url(r'^setup/',setup,name='setup'),
 	url(r'^login/',tenantAuth,name='tenant-auth'),
 	url(r'^dashboard/',tenantDashboard,name='dashboard'),
