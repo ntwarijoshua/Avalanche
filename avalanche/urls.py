@@ -16,7 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
+from tenant_site.views import index,setup,tenantDashboard,tenantAuth,logout_tenant
 
 urlpatterns = [
+	url(r'^$',index),
+	url(r'^setup/',setup,name='setup'),
+	url(r'^login/',tenantAuth,name='tenant-auth'),
+	url(r'^dashboard/',tenantDashboard,name='dashboard'),
+	url(r'^logout/',logout_tenant,name='logout')
     
 ]+static(settings.STATIC_URL,document_root = settings.STATIC_ROOT)

@@ -11,19 +11,22 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+env = environ.Env(DEBUG=(bool, False),) # set default values and casting
+environ.Env.read_env(os.path.join(BASE_DIR,".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g@!bol0g0upyor8b$am!kmshxmon-=t7uate#i$mt0unw8ya=f'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
+#print(env('DEBUG'))
 
 ALLOWED_HOSTS = [
     '*'
@@ -48,6 +51,7 @@ TENANT_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'tenant_site'
     )
 #tenant model
 
@@ -68,6 +72,7 @@ INSTALLED_APPS = [
     'public_site',
     'general_management',
     'invitation_manager',
+    'tenant_site'
     
 ]
 
@@ -112,11 +117,11 @@ WSGI_APPLICATION = 'avalanche.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'tenant_schemas.postgresql_backend',
-        'NAME':'Avalanche_Data',
-        'USER':'Josh',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'NAME':env('DB_NAME'),
+        'USER':env('DB_USER'),
+        'PASSWORD':env('DB_PASSWORD'),
+        'HOST':env('DB_HOST'),
+        'PORT':env('DB_PORT')
     }
 }
 
@@ -151,7 +156,7 @@ AUTHENTICATION_BACKENDS = (
     )
 #Login Url
 
-LOGIN_URL = '/admin/'
+LOGIN_URL = env('LOGIN_URL')
 
 
 

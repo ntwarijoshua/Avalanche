@@ -35,7 +35,7 @@ def dashboard(request):
 
 @login_required
 def tenants_all(request):
-	tenants = Tenant.objects.all()
+	tenants = Tenant.objects.all().exclude(schema_name='public')
 	return render(request,'general_management/tenants-all.html',{'tenants':tenants})
 
 @login_required
@@ -47,9 +47,10 @@ def create_tenants(request):
 			tenant_url = data.cleaned_data['domain']+'.'+'avalanche.dev' #TODO: this domain must be made dynamic not hardcoded
 			company_name = data.cleaned_data['name']
 			owner_email = data.cleaned_data['owner_email']
+			schema_name = company_name.replace(" ","_")
 			tenant = Tenant(
 					domain_url = tenant_url,
-					schema_name= company_name.lower()+'schema',
+					schema_name= schema_name.lower()+'_schema',
 					name=company_name,
 					paid_until='2017-01-01', #TODO: come up with a payment scheme for tenants
 					on_trial=True
@@ -58,6 +59,7 @@ def create_tenants(request):
 						tenant_name=company_name,
 						tenant_domain=tenant_url,
 						invitation_expiration= date.today()+timedelta(days=2),
+						invitation_sent=False,
 						invitation_token= uuid.uuid4().hex,
 						invited_email = owner_email
 				)
@@ -71,6 +73,7 @@ def create_tenants(request):
 				mailer.send()
 			except EmailNotSentException:
 				return redirect(tenants_all)
+			tenant.invitation_sent = True
 			tenant.save()
 			invitation.save()
 			return redirect(tenants_all)

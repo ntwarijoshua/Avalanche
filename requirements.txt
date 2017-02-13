@@ -1,6 +1,9 @@
 Django==1.10.5
+django-environ==0.4.1
 django-filter==1.0.1
 django-tenant-schemas==1.6.11
 djangorestframework==3.5.3
 Markdown==2.6.8
 psycopg2==2.6.2
+requests==2.13.0
+six==1.10.0
