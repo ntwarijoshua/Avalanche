@@ -29,8 +29,8 @@ install:
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
-
-script:
   - python manage.py makemigrations tenants
   - python manage.py migrate_schemas --shared
+
+script:
   - python manage.py test
