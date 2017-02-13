@@ -115,6 +115,8 @@ WSGI_APPLICATION = 'avalanche.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 if 'TRAVIS' in os.environ:
+    SECRET_KEY = get_env_variable('SECRET_KEY')
+    DEBUG = get_env_variable('DEBUG')
     DATABASES = {
         'default': {
             'ENGINE':'tenant_schemas.postgresql_backend',
