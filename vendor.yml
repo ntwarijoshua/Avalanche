@@ -5,8 +5,8 @@
 - ([^\s]*)import\.(css|less|scss|styl)$
 
 # Bootstrap css and js
-- (^|/)bootstrap([^.]*)\.(js|css|less|scss|styl)$
+- (^|/static/)bootstrap([^.]*)\.(js|css|less|scss|styl)$
 - (^|/)custom\.bootstrap([^\s]*)(js|css|less|scss|styl)$
 
 # Font Awesome
-- (^|/)font-awesome\.(css|less|scss|styl)$
+- (^|/static/)font-awesome\.(css|less|scss|styl)$
