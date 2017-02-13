@@ -117,6 +117,7 @@ WSGI_APPLICATION = 'avalanche.wsgi.application'
 if 'TRAVIS' in os.environ:
     SECRET_KEY = get_env_variable('SECRET_KEY')
     DEBUG = get_env_variable('DEBUG')
+    #Login Url
     LOGIN_URL=get_env_variable('LOGIN_URL')
     DATABASES = {
         'default': {
@@ -147,7 +148,7 @@ else:
 
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = env('DEBUG')
-
+    #Login Url
     LOGIN_URL = env('LOGIN_URL')
     
 
@@ -181,9 +182,8 @@ AUTHENTICATION_BACKENDS = (
     'avalanche.custom_backends.CustomEmailAuthBackend',
 
     )
-#Login Url
 
-LOGIN_URL = env('LOGIN_URL')
+
 
 
 
