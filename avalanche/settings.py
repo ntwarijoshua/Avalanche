@@ -117,6 +117,7 @@ WSGI_APPLICATION = 'avalanche.wsgi.application'
 if 'TRAVIS' in os.environ:
     SECRET_KEY = get_env_variable('SECRET_KEY')
     DEBUG = get_env_variable('DEBUG')
+    LOGIN_URL=get_env_variable('LOGIN_URL')
     DATABASES = {
         'default': {
             'ENGINE':'tenant_schemas.postgresql_backend',
@@ -146,6 +147,8 @@ else:
 
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = env('DEBUG')
+
+    LOGIN_URL = env('LOGIN_URL')
     
 
 
