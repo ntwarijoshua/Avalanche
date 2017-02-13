@@ -1,0 +1,4 @@
+$ cat .gitattributes
+*.py linguist-language=Python
+special-vendored-path/general_management/static linguist-vendored
+special-vendored-path/public_site/static linguist-vendored
