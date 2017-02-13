@@ -124,17 +124,6 @@ if 'TRAVIS' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE':'tenant_schemas.postgresql_backend',
-            'NAME':env('DB_NAME'),
-            'USER':env('DB_USER'),
-            'PASSWORD':env('DB_PASSWORD'),
-            'HOST':env('DB_HOST'),
-            'PORT':env('DB_PORT')
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE':'tenant_schemas.postgresql_backend',
             'NAME':'travisci',
             'USER':'postgres',
             'PASSWORD':'',
@@ -142,6 +131,18 @@ else:
             'PORT':''
         }
     }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE':'tenant_schemas.postgresql_backend',
+            'NAME':env('DB_NAME'),
+            'USER':env('DB_USER'),
+            'PASSWORD':env('DB_PASSWORD'),
+            'HOST':env('DB_HOST'),
+            'PORT':env('DB_PORT')
+        }
+    }
+    
 
 
 DATABASE_ROUTERS = (
