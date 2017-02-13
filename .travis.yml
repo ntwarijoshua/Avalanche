@@ -31,5 +31,5 @@ before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 
 script:
-  - python manage.py migrate_schemas --shared
+  - python manage.py migrate_schemas
   - python manage.py test
