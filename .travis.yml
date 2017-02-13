@@ -20,7 +20,7 @@ env:
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=avalanche.settings
-  - export PYTHONPATH=$HOME/builds/NtwariJoshua/avalanche
+  - export PYTHONPATH=$HOME/builds/NtwariJoshua/Avalanche
   - export PIP_USE_MIRRORS=true
   - export TRAVIS=true
 
