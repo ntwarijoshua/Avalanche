@@ -12,12 +12,18 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import environ
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env = environ.Env(DEBUG=(bool, False),) # set default values and casting
 environ.Env.read_env(os.path.join(BASE_DIR,".env"))
-
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_message = "set the %s environment variable" % var_name
+        raise ImproperlyConfigured(error_message)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -32,7 +38,7 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
-
+TRAVIS = get_env_variable('TRAVIS')
 #apps that all tenants can access
 SHARED_APPS = (
         'tenant_schemas',
@@ -114,17 +120,29 @@ WSGI_APPLICATION = 'avalanche.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE':'tenant_schemas.postgresql_backend',
-        'NAME':env('DB_NAME'),
-        'USER':env('DB_USER'),
-        'PASSWORD':env('DB_PASSWORD'),
-        'HOST':env('DB_HOST'),
-        'PORT':env('DB_PORT')
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':'tenant_schemas.postgresql_backend',
+            'NAME':env('DB_NAME'),
+            'USER':env('DB_USER'),
+            'PASSWORD':env('DB_PASSWORD'),
+            'HOST':env('DB_HOST'),
+            'PORT':env('DB_PORT')
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE':'tenant_schemas.postgresql_backend',
+            'NAME':'travisci',
+            'USER':'postgres',
+            'PASSWORD':'',
+            'HOST':'localhost',
+            'PORT':''
+        }
+    }
+
 
 DATABASE_ROUTERS = (
     'tenant_schemas.routers.TenantSyncRouter',
