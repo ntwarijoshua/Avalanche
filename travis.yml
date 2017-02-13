@@ -32,3 +32,4 @@ before_script:
 
 script:
   - python manage.py migrate_schemas --shared
+  - python manage.py test
