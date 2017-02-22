@@ -32,7 +32,6 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
-TRAVIS = get_env_variable('TRAVIS')
 #apps that all tenants can access
 SHARED_APPS = (
         'tenant_schemas',
@@ -51,7 +50,9 @@ TENANT_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'tenant_site'
+    'tenant_site',
+    'bus_operations',
+    #'rest_framework'
     )
 #tenant model
 
@@ -63,7 +64,6 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 INSTALLED_APPS = [
     'tenant_schemas',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -73,7 +73,9 @@ INSTALLED_APPS = [
     'public_site',
     'general_management',
     'invitation_manager',
-    'tenant_site'
+    'tenant_site',
+    'bus_operations',
+    'rest_framework',
     
 ]
 
@@ -90,6 +92,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'avalanche.urls'
 
+REST_FRAMEWORK={
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES':(
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+        'avalanche.permissions.IsNotAnonymous',
+        )
+}
 #public tenant routes
 PUBLIC_SCHEMA_URLCONF = 'avalanche.public_urls'
 
@@ -115,6 +128,7 @@ WSGI_APPLICATION = 'avalanche.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 if 'TRAVIS' in os.environ:
+    TRAVIS = get_env_variable('TRAVIS')
     SECRET_KEY = get_env_variable('SECRET_KEY')
     DEBUG = get_env_variable('DEBUG')
     #Login Url

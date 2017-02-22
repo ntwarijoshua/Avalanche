@@ -1,0 +1,40 @@
+{% extends "tenant_site/base.html" %}
+
+{% block title%}Avalanche | Tenants {% endblock %}
+
+{% block main-content %}
+	
+	<section class="content">
+	<section class="content-header">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>
+            Bus Routes
+          </h1>
+      </div>
+      </div>
+    </section>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Create New Route</h3>
+            </div>
+            <!-- /.box-header -->
+            <form method="post" action="">
+            <div class="box-body">
+              {% csrf_token %}
+              {{form}}
+            </div>
+            <div class="box-footer">
+                  <a href="{% url 'list-routes' %}" class="btn btn-danger btn-flat pull-right">Cancel</a>
+                  <button type="submit" class="btn btn-success btn-flat pull-right">Save</button>
+            </div>
+            </form>
+        </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

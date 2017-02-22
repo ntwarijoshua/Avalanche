@@ -1,0 +1,78 @@
+{% extends "tenant_site/base.html" %}
+
+{% block title%}Avalanche | Tenants {% endblock %}
+
+{% block main-content %}
+<section class="content">
+<section class="content-header">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>
+            Bus Routes
+          </h1>
+      </div>
+
+      <div class="col-xs-6">
+        <a class="btn btn-success pull-right" href="{% url 'create-routes' %}"><i class="ion-plus-circled"></i> <span>Add Route</span></a>
+      </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">All Routes</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th colspan="2">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for route in routes %}
+                <tr>
+                  <td>{{route.name}}</td>
+                  <td class="actions no-wrap text-right"><a href="#" class="btn btn-sm btn-info"><i class="ion-edit"></i></a> 
+                  <a href="#" class="btn btn-sm btn-danger"><i class="ion-trash-a"></i></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th colspan="2">Actions</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+      </div>
+    </div>
+
+    </section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+{% endblock %}

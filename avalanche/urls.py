@@ -13,16 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.conf import settings
 from django.conf.urls.static import static
 from tenant_site.views import index,setup,tenantDashboard,tenantAuth,logout_tenant
+from bus_operations.views import BusListRoutesView,BusCreateRoutesView
 
 urlpatterns = [
 	url(r'^$',index,name='tenant-home'),
 	url(r'^setup/',setup,name='setup'),
 	url(r'^login/',tenantAuth,name='tenant-auth'),
 	url(r'^dashboard/',tenantDashboard,name='dashboard'),
-	url(r'^logout/',logout_tenant,name='logout')
+	url(r'^logout/',logout_tenant,name='logout'),
+    url(r'^bus-routes/$',BusListRoutesView.as_view(),name='list-routes'),
+    url(r'^bus-routes/create',BusCreateRoutesView.as_view(),name='create-routes'),
+    url(r'^api/v1/',include('bus_operations.apiurls'))
     
 ]+static(settings.STATIC_URL,document_root = settings.STATIC_ROOT)
