@@ -3,7 +3,11 @@ django-environ==0.4.1
 django-filter==1.0.1
 django-tenant-schemas==1.6.11
 djangorestframework==3.5.3
+factory-boy==2.8.1
+Faker==0.7.7
+ipaddress==1.0.18
 Markdown==2.6.8
 psycopg2==2.6.2
+python-dateutil==2.6.0
 requests==2.13.0
 six==1.10.0

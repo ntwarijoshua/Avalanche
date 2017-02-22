@@ -2,7 +2,7 @@ from avalanche.custom_testcase import CustomTenantTestCase
 from tenant_schemas.test.client import TenantClient
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
-from factories import BusFactory,BusRouteFactory
+from .factories import BusFactory,BusRouteFactory
 import json
 import base64
 # Create your tests here.
